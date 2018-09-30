@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 22-may-2018 12:22:28 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.Tutorias" table="tutorias" catalog="gestor" optimistic-lock="version">
+        <id name="codigo" type="java.lang.Integer">
+            <column name="codigo" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="profesores" class="modelo.Profesores" fetch="select">
+            <column name="codigo_profesor" not-null="true" />
+        </many-to-one>
+        <property name="dia" type="string">
+            <column name="dia" length="50" not-null="true" />
+        </property>
+        <property name="comienzo" type="string">
+            <column name="comienzo" length="50" not-null="true" />
+        </property>
+        <property name="fin" type="string">
+            <column name="fin" length="50" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

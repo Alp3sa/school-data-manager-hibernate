@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 22-may-2018 12:22:28 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.Grupos" table="grupos" catalog="gestor" optimistic-lock="version">
+        <id name="codigo" type="java.lang.Integer">
+            <column name="codigo" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="cursos" class="modelo.Cursos" fetch="select">
+            <column name="codigo_curso" not-null="true" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" length="50" not-null="true" />
+        </property>
+        <property name="codigoTutor" type="java.lang.Integer">
+            <column name="codigo_tutor" />
+        </property>
+        <set name="asignacionAulases" table="asignacion_aulas" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codigo_grupo" not-null="true" />
+            </key>
+            <one-to-many class="modelo.AsignacionAulas" />
+        </set>
+        <set name="alumnoses" table="alumnos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codigo_grupo" not-null="true" />
+            </key>
+            <one-to-many class="modelo.Alumnos" />
+        </set>
+    </class>
+</hibernate-mapping>

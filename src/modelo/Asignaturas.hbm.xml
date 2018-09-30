@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 22-may-2018 12:22:28 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.Asignaturas" table="asignaturas" catalog="gestor" optimistic-lock="version">
+        <id name="codigo" type="java.lang.Integer">
+            <column name="codigo" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="profesores" class="modelo.Profesores" fetch="select">
+            <column name="codigo_profesor" not-null="true" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" length="50" not-null="true" />
+        </property>
+        <property name="codigoCurso" type="int">
+            <column name="codigo_curso" not-null="true" />
+        </property>
+        <property name="codigoGrupo" type="int">
+            <column name="codigo_grupo" not-null="true" />
+        </property>
+        <set name="matriculases" table="matriculas" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codigo_curso" not-null="true" />
+            </key>
+            <one-to-many class="modelo.Matriculas" />
+        </set>
+        <set name="horarioses" table="horarios" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codigo_asignatura" not-null="true" />
+            </key>
+            <one-to-many class="modelo.Horarios" />
+        </set>
+    </class>
+</hibernate-mapping>

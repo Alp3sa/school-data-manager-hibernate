@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 22-may-2018 12:22:28 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.Matriculas" table="matriculas" catalog="gestor" optimistic-lock="version">
+        <composite-id name="id" class="modelo.MatriculasId">
+            <key-property name="codigoCurso" type="int">
+                <column name="codigo_curso" />
+            </key-property>
+            <key-property name="codigoAlumno" type="int">
+                <column name="codigo_alumno" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="alumnos" class="modelo.Alumnos" update="false" insert="false" fetch="select">
+            <column name="codigo_alumno" not-null="true" />
+        </many-to-one>
+        <many-to-one name="asignaturas" class="modelo.Asignaturas" update="false" insert="false" fetch="select">
+            <column name="codigo_curso" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>
